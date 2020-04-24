@@ -1,0 +1,22 @@
+<h2><a routerLink="/add">Add Contact</a></h2>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>#</th>
+    <th>Name</th>
+    <th>Phone Number</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let contact of contacts, let i = index">
+    <td>{{ i+1 }}</td>
+    <td>{{ contact.name }}</td>
+    <td>{{ contact.phoneNumber }}</td>
+    <td>
+      <button (click)="delete(contact.id)" class="btn btn-danger">Delete</button>
+      <button (click)="update(contact.id)" class="btn btn-info" style="margin-left: 10px">Update</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
