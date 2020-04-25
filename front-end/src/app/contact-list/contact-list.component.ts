@@ -9,7 +9,7 @@ import {Router} from '@angular/router';
   styleUrls: ['./contact-list.component.css']
 })
 export class ContactListComponent implements OnInit {
-  contacts = [];
+  contacts: object = [];
 
   constructor(private contactSvc: ContactService, private router: Router) {
   }

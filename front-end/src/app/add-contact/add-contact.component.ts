@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ContactService} from '../services/contact.service';
-import {NgForm} from '@angular/forms';
+import {FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 
 @Component({
@@ -9,14 +9,33 @@ import {Router} from '@angular/router';
   styleUrls: ['./add-contact.component.css']
 })
 export class AddContactComponent implements OnInit {
+  form = new FormGroup({
+    name: new FormControl(
+      '',
+      [Validators.required, Validators.minLength(3), Validators.maxLength(15)],
+      []),
+    phoneNumber: new FormControl(
+      '',
+      [Validators.required, Validators.minLength(10), Validators.maxLength(15)],
+      []
+    )
+  });
 
   constructor(private contactSvc: ContactService, private  router: Router) { }
 
   ngOnInit(): void {
   }
 
-  onSubmit(form) {
-    this.contactSvc.create(form).subscribe(data => {
+  get name() {
+    return this.form.get('name');
+  }
+
+  get number() {
+    return this.form.get('phoneNumber');
+  }
+
+  onSubmit() {
+    this.contactSvc.create(this.form.value).subscribe(data => {
       this.router.navigate(['contacts']);
     });
   }

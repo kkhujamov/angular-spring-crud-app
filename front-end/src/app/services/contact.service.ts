@@ -18,7 +18,7 @@ export class ContactService {
   }
 
   getOne(id: number) {
-    return this.http.get<any>(`${this.url}/${id}`);
+    return this.http.get<ApiResponse>(`${this.url}/${id}`);
   }
 
   create(contact: Contact) {

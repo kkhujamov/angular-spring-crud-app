@@ -2,23 +2,15 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6 offset-4">
-      <form (ngSubmit)="onSubmit(form.value)" #form="ngForm">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="form-group">
             <label for="name">Contact Name</label>
-            <input
-            ngModel
-            required
-            minlength="3"
-            #name="ngModel"
-            name="name"
+            <input formControlName="name"
             type="text"
             id="name"
             class="form-control"
-          >
-            <div
-              class="alert alert-danger"
-              *ngIf="name.touched && !name.valid"
             >
+            <div class="alert alert-danger" *ngIf="name.touched && !name.valid">
               <div *ngIf="name.errors.required">Name is required.</div>
               <div *ngIf="name.errors.minlength">
                 Minlength is {{ name.errors.minlength.requiredLength }}
@@ -28,23 +20,18 @@
         <div class="form-group">
           <label for="number">Phone Number </label>
           <input
-            ngModel
-            required
-            minlength="10"
-            maxlength="15"
-            #number="ngModel"
-            name="phoneNumber"
+            formControlName="phoneNumber"
             type="text"
             id="number"
             class="form-control"
             >
-          <div
-            class="alert alert-danger"
-            *ngIf="number.touched && !number.valid"
-          >
+          <div class="alert alert-danger" *ngIf="number.touched && !number.valid">
             <div *ngIf="number.errors.required">Phone number is required.</div>
             <div *ngIf="number.errors.minlength">
               Minlength is {{ number.errors.minlength.requiredLength }}
+            </div>
+            <div *ngIf="number.errors.maxlength">
+            Minlength is {{ number.errors.maxlength.requiredLength }}
             </div>
           </div>
         </div>
